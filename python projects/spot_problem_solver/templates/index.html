@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spot Problem Solver — Spot a Problem. Build a Solution. Create an Impact.</title>
+  <meta name="description" content="Collaborative problem-solving platform connecting real-world problems with innovators, researchers, startups, and technology." />
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Tailwind Configuration for Spot Problem Solver theme -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+              900: '#1e3a8a',
+            },
+            impact: {
+              500: '#10b981',
+              600: '#059669',
+            },
+            accent: {
+              500: '#f59e0b',
+              600: '#d97706',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons & FontAwesome -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- React 18, ReactDOM 18 & Babel Standalone for React JS Animations -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <!-- Chart.js for Admin Analytics -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="/static/css/custom.css" />
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col antialiased selection:bg-brand-500 selection:text-white">
+
+  <!-- ===== NAVIGATION BAR ===== -->
+  <header class="sticky top-0 z-50 glass-nav transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- Logo Concept: Location Spot Pin + Lightbulb Icon -->
+        <a href="#home" onclick="navigateTo('home')" class="flex items-center gap-3 group">
+          <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-brand-700 via-brand-600 to-impact-500 flex items-center justify-center text-white shadow-lg shadow-brand-500/25 group-hover:scale-105 transition-transform duration-300">
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <!-- Location Spot Pin Outline -->
+              <path d="M12 21.5C12 21.5 20 14.5 20 9.5C20 5.08172 16.4183 1.5 12 1.5C7.58172 1.5 4 5.08172 4 9.5C4 14.5 12 21.5 12 21.5Z" />
+              <!-- Glowing Lightbulb Filament inside Spot Pin -->
+              <circle cx="12" cy="9" r="3" fill="#F59E0B" stroke="#FFFFFF" stroke-width="1.5" />
+            </svg>
+          </div>
+          <div>
+            <span class="font-heading text-xl font-bold tracking-tight text-slate-900 block leading-none">
+              SPOT <span class="text-brand-600">PROBLEM SOLVER</span>
+            </span>
+            <span class="text-[10px] font-semibold uppercase tracking-widest text-slate-500 block mt-1">Impact & Tech Platform</span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden lg:flex items-center gap-1 font-medium text-sm text-slate-600">
+          <button onclick="navigateTo('home')" class="nav-btn px-3 py-2 rounded-lg hover:text-brand-600 hover:bg-brand-50 transition-colors" data-page="home">Home</button>
+          <button onclick="navigateTo('discover')" class="nav-btn px-3 py-2 rounded-lg hover:text-brand-600 hover:bg-brand-50 transition-colors" data-page="discover">Discover Problems</button>
+          <button onclick="navigateTo('solutions')" class="nav-btn px-3 py-2 rounded-lg hover:text-brand-600 hover:bg-brand-50 transition-colors" data-page="solutions">Solutions</button>
+          <button onclick="navigateTo('challenges')" class="nav-btn px-3 py-2 rounded-lg hover:text-brand-600 hover:bg-brand-50 transition-colors" data-page="challenges">Challenges</button>
+          <button onclick="navigateTo('teams')" class="nav-btn px-3 py-2 rounded-lg hover:text-brand-600 hover:bg-brand-50 transition-colors" data-page="teams">Teams</button>
+          <button onclick="navigateTo('leaderboard')" class="nav-btn px-3 py-2 rounded-lg hover:text-brand-600 hover:bg-brand-50 transition-colors" data-page="leaderboard">Leaderboard</button>
+          <button onclick="navigateTo('success-stories')" class="nav-btn px-3 py-2 rounded-lg hover:text-brand-600 hover:bg-brand-50 transition-colors" data-page="success-stories">Success Stories</button>
+          <button onclick="navigateTo('admin')" class="nav-btn px-3 py-2 rounded-lg hover:text-brand-600 hover:bg-brand-50 transition-colors flex items-center gap-1 text-slate-500" data-page="admin"><i data-lucide="shield-check" class="w-4 h-4"></i> Admin</button>
+        </nav>
+
+        <!-- Header Actions -->
+        <div class="hidden sm:flex items-center gap-3">
+
+          <!-- AI Assistant Quick Trigger -->
+          <button onclick="openAIAssistantModal()" class="px-3.5 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold flex items-center gap-2 border border-slate-200 transition-all">
+            <span class="w-2 h-2 rounded-full bg-amber-500 animate-ping"></span>
+            <i data-lucide="sparkles" class="w-4 h-4 text-amber-500"></i> AI Assistant
+          </button>
+
+          <!-- Notifications Bell -->
+          <div class="relative">
+            <button onclick="toggleNotificationDropdown()" class="p-2.5 rounded-lg text-slate-600 hover:bg-slate-100 relative transition-colors">
+              <i data-lucide="bell" class="w-5 h-5"></i>
+              <span id="nav-notif-badge" class="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-rose-500 rounded-full border-2 border-white"></span>
+            </button>
+            <!-- Dropdown -->
+            <div id="notif-dropdown" class="hidden absolute right-0 mt-3 w-80 bg-white rounded-2xl shadow-2xl border border-slate-100 py-3 z-50">
+              <div class="px-4 py-2 border-b border-slate-100 flex items-center justify-between">
+                <span class="font-bold text-xs uppercase tracking-wider text-slate-500">Notifications</span>
+                <span class="text-xs text-brand-600 font-semibold cursor-pointer" onclick="markAllNotificationsRead()">Mark all read</span>
+              </div>
+              <div id="notif-list" class="max-h-64 overflow-y-auto divide-y divide-slate-50 text-xs">
+                <!-- Loaded via JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Post a Problem Action CTA -->
+          <button onclick="navigateTo('submit-problem')" class="px-4 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm shadow-md shadow-brand-500/20 hover:shadow-lg transition-all flex items-center gap-2">
+            <i data-lucide="plus-circle" class="w-4 h-4"></i> Post a Problem
+          </button>
+
+          <!-- User Role / Profile Trigger -->
+          <button onclick="navigateTo('profile')" class="flex items-center gap-2 p-1.5 rounded-xl border border-slate-200 hover:bg-slate-50 transition-colors">
+            <img id="nav-user-avatar" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80" alt="Avatar" class="w-8 h-8 rounded-lg object-cover" />
+            <span class="text-xs font-semibold text-slate-800 pr-1 hidden xl:inline">Priya (Innovator)</span>
+          </button>
+        </div>
+
+        <!-- Mobile Menu Toggle -->
+        <button onclick="toggleMobileMenu()" class="lg:hidden p-2 rounded-lg text-slate-600 hover:bg-slate-100">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+
+      </div>
+    </div>
+
+    <!-- Mobile Drawer Menu -->
+    <div id="mobile-menu" class="hidden lg:hidden border-b border-slate-200 bg-white px-4 py-4 space-y-2">
+      <button onclick="navigateTo('home'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded-lg font-medium text-slate-700 hover:bg-slate-100">Home</button>
+      <button onclick="navigateTo('discover'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded-lg font-medium text-slate-700 hover:bg-slate-100">Discover Problems</button>
+      <button onclick="navigateTo('solutions'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded-lg font-medium text-slate-700 hover:bg-slate-100">Explore Solutions</button>
+      <button onclick="navigateTo('challenges'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded-lg font-medium text-slate-700 hover:bg-slate-100">Challenges</button>
+      <button onclick="navigateTo('teams'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded-lg font-medium text-slate-700 hover:bg-slate-100">Teams</button>
+      <button onclick="navigateTo('leaderboard'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded-lg font-medium text-slate-700 hover:bg-slate-100">Leaderboard</button>
+      <button onclick="navigateTo('success-stories'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded-lg font-medium text-slate-700 hover:bg-slate-100">Success Stories</button>
+      <button onclick="navigateTo('submit-problem'); toggleMobileMenu();" class="block w-full text-center px-4 py-2.5 rounded-xl bg-brand-600 text-white font-semibold shadow-md">Post a Problem</button>
+    </div>
+  </header>
+
+  <!-- ===== MAIN CONTENT CONTAINER ===== -->
+  <main class="flex-grow">
+    
+    <!-- PAGE 1: HOMEPAGE -->
+    <section id="page-home" class="page-view relative">
+      
+      <!-- HERO SECTION -->
+      <div class="relative pt-12 pb-20 md:pt-20 md:pb-28 overflow-hidden">
+        <div class="hero-gradient-bg">
+          <div class="blob-1"></div>
+          <div class="blob-2"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div class="text-center max-w-3xl mx-auto space-y-6">
+            
+            <!-- Category Tagline Badge -->
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-50 border border-brand-200 text-brand-700 text-xs font-bold tracking-wide uppercase shadow-sm">
+              <span class="w-2 h-2 rounded-full bg-brand-600 animate-pulse"></span>
+              Global Collaborative Problem Solving Platform
+            </div>
+
+            <!-- Large Headline -->
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 leading-[1.15]">
+              Every Problem Has a Solution. <br class="hidden sm:inline" />
+              <span class="bg-gradient-to-r from-brand-600 via-brand-700 to-impact-500 bg-clip-text text-transparent">Help Us Find It.</span>
+            </h1>
+
+            <!-- Subheading -->
+            <p class="text-lg sm:text-xl text-slate-600 font-normal leading-relaxed">
+              <strong class="font-semibold text-slate-800">Spot Problem Solver</strong> connects real-world challenges from government bodies, universities, companies, and NGOs with the innovators, technology, and ideas capable of solving them.
+            </p>
+
+            <!-- Hero Action Buttons -->
+            <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+              <button onclick="navigateTo('discover')" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-base shadow-xl shadow-brand-500/25 hover:shadow-2xl hover:scale-105 transition-all flex items-center justify-center gap-3">
+                <i data-lucide="search" class="w-5 h-5"></i> Explore Problems
+              </button>
+              <button onclick="navigateTo('submit-problem')" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-white hover:bg-slate-50 text-slate-800 font-bold text-base border-2 border-slate-200 shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-3">
+                <i data-lucide="plus-circle" class="w-5 h-5 text-brand-600"></i> Post a Problem
+              </button>
+            </div>
+
+          </div>
+
+          <!-- WORKFLOW GRAPHIC ILLUSTRATION: Problem -> Ideas -> Collaboration -> Solution -> Impact -->
+          <div class="mt-16 pt-8 border-t border-slate-200/80">
+            <h3 class="text-center text-xs font-bold uppercase tracking-widest text-slate-500 mb-8">The Platform Workflow</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+              
+              <div class="workflow-step-node glass-card p-6 rounded-2xl text-center space-y-3">
+                <div class="w-12 h-12 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center mx-auto text-xl font-bold">1</div>
+                <h4 class="font-bold text-slate-900 text-base">Spot Problem</h4>
+                <p class="text-xs text-slate-500">Government, NGOs & Orgs post real challenges with specs & rewards.</p>
+              </div>
+
+              <div class="workflow-step-node glass-card p-6 rounded-2xl text-center space-y-3">
+                <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center mx-auto text-xl font-bold">2</div>
+                <h4 class="font-bold text-slate-900 text-base">Generate Ideas</h4>
+                <p class="text-xs text-slate-500">Innovators explore requirements & use AI Assistant to design solutions.</p>
+              </div>
+
+              <div class="workflow-step-node glass-card p-6 rounded-2xl text-center space-y-3">
+                <div class="w-12 h-12 rounded-xl bg-brand-100 text-brand-600 flex items-center justify-center mx-auto text-xl font-bold">3</div>
+                <h4 class="font-bold text-slate-900 text-base">Collaborate</h4>
+                <p class="text-xs text-slate-500">Form cross-functional teams with developers, researchers & experts.</p>
+              </div>
+
+              <div class="workflow-step-node glass-card p-6 rounded-2xl text-center space-y-3">
+                <div class="w-12 h-12 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center mx-auto text-xl font-bold">4</div>
+                <h4 class="font-bold text-slate-900 text-base">Build Solution</h4>
+                <p class="text-xs text-slate-500">Submit hardware/software prototypes, demo URLs & implementation plans.</p>
+              </div>
+
+              <div class="workflow-step-node glass-card p-6 rounded-2xl text-center space-y-3">
+                <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto text-xl font-bold">5</div>
+                <h4 class="font-bold text-slate-900 text-base">Create Impact</h4>
+                <p class="text-xs text-slate-500">Orgs select winners, fund implementation, & measure real-world results.</p>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- REACT JS ANIMATED INNOVATION RADAR & IMPACT MATRIX COMPONENT -->
+      <section class="py-14 bg-gradient-to-b from-slate-900 via-brand-950 to-slate-900 border-y border-slate-800 text-white relative overflow-hidden">
+        <div id="react-innovation-radar-root" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10"></div>
+      </section>
+
+      <!-- FEATURED PROBLEMS HIGHLIGHT -->
+      <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-10">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-brand-600">Urgent Challenges</span>
+            <h2 class="text-3xl font-extrabold text-slate-900 mt-1">Featured Real-World Problems</h2>
+          </div>
+          <button onclick="navigateTo('discover')" class="mt-4 md:mt-0 font-semibold text-sm text-brand-600 hover:text-brand-700 flex items-center gap-1">
+            View All Marketplace Problems <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <div id="home-featured-problems-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Loaded dynamically -->
+        </div>
+      </section>
+
+      <!-- AI ASSISTANT TEASER BANNER -->
+      <section class="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="rounded-3xl bg-gradient-to-r from-slate-900 via-brand-950 to-slate-900 text-white p-8 md:p-12 relative overflow-hidden shadow-2xl border border-slate-800">
+          <div class="relative z-10 max-w-2xl space-y-4">
+            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-bold uppercase border border-amber-500/30">
+              <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> AI-Powered Feature
+            </span>
+            <h2 class="text-3xl font-extrabold tracking-tight">Need help defining a problem or refining a solution?</h2>
+            <p class="text-slate-300 text-sm leading-relaxed">
+              Use our intelligent <strong>Problem Analyzer</strong> to instantly extract root causes, target demographics, and suggested tech stacks, or use the <strong>AI Solution Assistant</strong> for technical feedback and scalability metrics.
+            </p>
+            <div class="pt-2">
+              <button onclick="openAIAssistantModal()" class="px-6 py-3.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-sm shadow-lg shadow-amber-500/25 transition-all flex items-center gap-2">
+                <i data-lucide="cpu" class="w-4 h-4"></i> Try AI Problem & Solution Assistant
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- IMPORTANT HOMEPAGE CTA -->
+      <section class="py-20 bg-slate-100 border-t border-slate-200 text-center">
+        <div class="max-w-4xl mx-auto px-4 space-y-6">
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900">What Problem Are You Ready to Solve?</h2>
+          <p class="text-slate-600 max-w-2xl mx-auto text-base">Join thousands of researchers, engineers, NGOs, and government leaders driving technology-first social impact.</p>
+          <div class="flex flex-wrap items-center justify-center gap-4 pt-4">
+            <button onclick="navigateTo('submit-problem')" class="px-7 py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm shadow-lg">Post a Problem</button>
+            <button onclick="navigateTo('discover')" class="px-7 py-3.5 rounded-xl bg-white hover:bg-slate-50 text-slate-800 font-bold text-sm border border-slate-300 shadow-sm">Find a Problem</button>
+            <button onclick="navigateTo('solutions')" class="px-7 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-lg">Build a Solution</button>
+          </div>
+        </div>
+      </section>
+
+    </section>
+
+    <!-- PAGE 2: DISCOVER PROBLEMS MARKETPLACE -->
+    <section id="page-discover" class="page-view hidden py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      
+      <div class="border-b border-slate-200 pb-6">
+        <h1 class="text-3xl font-extrabold text-slate-900">Discover Problems</h1>
+        <p class="text-slate-600 text-sm mt-1">Explore real-world challenges posted by validated organizations, cities, and communities worldwide.</p>
+      </div>
+
+      <!-- SEARCH & MULTI-FILTER BAR -->
+      <div class="glass-card p-6 rounded-2xl space-y-4">
+        
+        <!-- Search Input -->
+        <div class="relative">
+          <i data-lucide="search" class="w-5 h-5 absolute left-4 top-3.5 text-slate-400"></i>
+          <input type="text" id="problem-search-input" onkeyup="filterProblems()" placeholder="Search problems by keywords, title, technology..." class="w-full pl-12 pr-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" />
+        </div>
+
+        <!-- Filter Dropdowns Grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 text-xs">
+          
+          <div>
+            <label class="font-semibold text-slate-700 block mb-1">Category</label>
+            <select id="filter-category" onchange="filterProblems()" class="w-full p-2.5 rounded-lg border border-slate-200 bg-white font-medium focus:outline-none focus:ring-2 focus:ring-brand-500">
+              <option value="">All Categories</option>
+              <option value="Education">Education</option>
+              <option value="Healthcare">Healthcare</option>
+              <option value="Agriculture">Agriculture</option>
+              <option value="Environment">Environment</option>
+              <option value="Smart Cities">Smart Cities</option>
+              <option value="Transportation">Transportation</option>
+              <option value="Government">Government</option>
+              <option value="Cybersecurity">Cybersecurity</option>
+              <option value="AI & Technology">AI & Technology</option>
+              <option value="Employment">Employment</option>
+              <option value="Rural Development">Rural Development</option>
+              <option value="Waste Management">Waste Management</option>
+              <option value="Women & Child Development">Women & Child Development</option>
+              <option value="Water Management">Water Management</option>
+              <option value="Disaster Management">Disaster Management</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="font-semibold text-slate-700 block mb-1">Difficulty</label>
+            <select id="filter-difficulty" onchange="filterProblems()" class="w-full p-2.5 rounded-lg border border-slate-200 bg-white font-medium focus:outline-none focus:ring-2 focus:ring-brand-500">
+              <option value="">All Difficulties</option>
+              <option value="Easy">Easy</option>
+              <option value="Medium">Medium</option>
+              <option value="Hard">Hard</option>
+              <option value="Expert">Expert</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="font-semibold text-slate-700 block mb-1">Status</label>
+            <select id="filter-status" onchange="filterProblems()" class="w-full p-2.5 rounded-lg border border-slate-200 bg-white font-medium focus:outline-none focus:ring-2 focus:ring-brand-500">
+              <option value="">All Statuses</option>
+              <option value="Open">Open</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Solved">Solved</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="font-semibold text-slate-700 block mb-1">Sort By</label>
+            <select id="filter-sort" onchange="filterProblems()" class="w-full p-2.5 rounded-lg border border-slate-200 bg-white font-medium focus:outline-none focus:ring-2 focus:ring-brand-500">
+              <option value="newest">Newest First</option>
+              <option value="most_supported">Most Supported</option>
+              <option value="most_viewed">Most Viewed</option>
+              <option value="urgent">Urgent Deadline</option>
+            </select>
+          </div>
+
+          <div class="flex items-end">
+            <button onclick="resetProblemFilters()" class="w-full p-2.5 rounded-lg bg-slate-100 hover:bg-slate-200 font-semibold text-slate-700 transition-colors">
+              Reset Filters
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- PROBLEMS MARKETPLACE GRID -->
+      <div id="discover-problems-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Rendered dynamically -->
+      </div>
+
+    </section>
+
+    <!-- PAGE 3: PROBLEM DETAILS PAGE -->
+    <section id="page-problem-detail" class="page-view hidden py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      <div id="problem-detail-container">
+        <!-- Loaded via JS -->
+      </div>
+    </section>
+
+    <!-- PAGE 4: SUBMIT A PROBLEM (MULTI-STEP WIZARD) -->
+    <section id="page-submit-problem" class="page-view hidden py-12 max-w-4xl mx-auto px-4 space-y-8">
+      
+      <div class="text-center space-y-2">
+        <h1 class="text-3xl font-extrabold text-slate-900">Post a Real-World Problem</h1>
+        <p class="text-slate-600 text-sm">Follow our 4-step structured wizard to publish your challenge to thousands of global innovators.</p>
+      </div>
+
+      <!-- Step Indicator Header -->
+      <div class="step-indicator px-8 py-4">
+        <div class="step-item active" id="step-dot-1">1</div>
+        <div class="step-item" id="step-dot-2">2</div>
+        <div class="step-item" id="step-dot-3">3</div>
+        <div class="step-item" id="step-dot-4">4</div>
+      </div>
+
+      <!-- Form Card -->
+      <div class="glass-card p-8 rounded-3xl space-y-6">
+        
+        <!-- STEP 1: Basic Info -->
+        <div id="submit-step-1" class="step-content space-y-5">
+          <h3 class="text-lg font-bold text-slate-900 border-b pb-3">Step 1 — Basic Information</h3>
+          
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Problem Title *</label>
+            <input type="text" id="sp-title" placeholder="e.g. Smart Water Quality Monitoring for Remote Villages" class="w-full p-3 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none" required />
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Organization / Department Name *</label>
+              <input type="text" id="sp-org" placeholder="e.g. Ministry of Environment or NGO Name" class="w-full p-3 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none" required />
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Category *</label>
+              <select id="sp-category" class="w-full p-3 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                <option value="Education">Education</option>
+                <option value="Healthcare">Healthcare</option>
+                <option value="Agriculture">Agriculture</option>
+                <option value="Environment">Environment</option>
+                <option value="Smart Cities">Smart Cities</option>
+                <option value="Transportation">Transportation</option>
+                <option value="Government">Government</option>
+                <option value="Cybersecurity">Cybersecurity</option>
+                <option value="AI & Technology" selected>AI & Technology</option>
+                <option value="Employment">Employment</option>
+                <option value="Rural Development">Rural Development</option>
+                <option value="Waste Management">Waste Management</option>
+                <option value="Women & Child Development">Women & Child Development</option>
+                <option value="Water Management">Water Management</option>
+                <option value="Disaster Management">Disaster Management</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Location / Region *</label>
+              <input type="text" id="sp-location" placeholder="e.g. Rural Communities (Global) or City Name" class="w-full p-3 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none" />
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Difficulty Level</label>
+              <select id="sp-difficulty" class="w-full p-3 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                <option value="Easy">Easy</option>
+                <option value="Medium" selected>Medium</option>
+                <option value="Hard">Hard</option>
+                <option value="Expert">Expert</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 2: Description -->
+        <div id="submit-step-2" class="step-content hidden space-y-5">
+          <h3 class="text-lg font-bold text-slate-900 border-b pb-3">Step 2 — Problem Description & Impact</h3>
+          
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Detailed Problem Statement *</label>
+            <textarea id="sp-description" rows="4" placeholder="Describe the core problem, context, and current obstacles..." class="w-full p-3 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none"></textarea>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Who is Affected? (Target Users)</label>
+              <textarea id="sp-target" rows="3" placeholder="e.g. 50,000 villagers, hospital staff, smallholder farmers..." class="w-full p-3 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none"></textarea>
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Why is it Important?</label>
+              <textarea id="sp-why" rows="3" placeholder="Explain the social, economic, or environmental consequences..." class="w-full p-3 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none"></textarea>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Expected Outcome & Deliverables</label>
+            <input type="text" id="sp-outcome" placeholder="e.g. Low-cost IoT sensor prototype with SMS alert system" class="w-full p-3 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none" />
+          </div>
+        </div>
+
+        <!-- STEP 3: Requirements -->
+        <div id="submit-step-3" class="step-content hidden space-y-5">
+          <h3 class="text-lg font-bold text-slate-900 border-b pb-3">Step 3 — Technical & Budget Requirements</h3>
+          
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Required Technologies (Comma-separated)</label>
+            <input type="text" id="sp-tech" placeholder="e.g. Python, IoT, AI/ML, React, Cloud" class="w-full p-3 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none" />
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Budget / Grant Funding</label>
+              <input type="text" id="sp-budget" placeholder="e.g. $50,000 Grant or Unfunded Challenge" class="w-full p-3 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none" />
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Submission Deadline</label>
+              <input type="date" id="sp-deadline" value="2026-11-30" class="w-full p-3 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none" />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Attachment URL / Document Link</label>
+            <input type="text" id="sp-attachments" placeholder="e.g. https://drive.google.com/spec_document.pdf" class="w-full p-3 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none" />
+          </div>
+        </div>
+
+        <!-- STEP 4: Review & Submit -->
+        <div id="submit-step-4" class="step-content hidden space-y-5">
+          <h3 class="text-lg font-bold text-slate-900 border-b pb-3">Step 4 — Review & Publish</h3>
+          <div id="submit-review-summary" class="p-6 rounded-2xl bg-slate-50 border border-slate-200 text-sm space-y-3">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+
+        <!-- Wizard Nav Buttons -->
+        <div class="flex items-center justify-between pt-6 border-t border-slate-100">
+          <button type="button" id="sp-prev-btn" onclick="wizardPrevStep()" class="px-6 py-2.5 rounded-xl border border-slate-300 text-slate-700 font-semibold text-sm hidden">Previous</button>
+          <div class="ml-auto flex items-center gap-3">
+            <button type="button" id="sp-next-btn" onclick="wizardNextStep()" class="px-7 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm shadow-md">Next Step</button>
+            <button type="button" id="sp-submit-btn" onclick="submitProblemForm()" class="px-7 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm shadow-md hidden">Publish Problem</button>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- PAGE 5: SUBMIT A SOLUTION FORM -->
+    <section id="page-submit-solution" class="page-view hidden py-12 max-w-4xl mx-auto px-4 space-y-8">
+      
+      <div class="text-center space-y-2">
+        <h1 class="text-3xl font-extrabold text-slate-900">Submit a Solution Proposal</h1>
+        <p class="text-slate-600 text-sm">Present your technical prototype, architecture, and social impact metrics to problem owners.</p>
+      </div>
+
+      <div class="glass-card p-8 rounded-3xl space-y-6">
+        
+        <input type="hidden" id="sol-problem-id" value="1" />
+
+        <div class="p-4 rounded-2xl bg-brand-50 border border-brand-200 text-xs text-brand-800 flex items-center justify-between">
+          <span>Solving Problem: <strong id="sol-problem-title-display">Smart Water Quality Monitoring for Remote Villages</strong></span>
+          <button onclick="navigateTo('discover')" class="text-brand-600 underline font-semibold">Change Problem</button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Solution Name *</label>
+            <input type="text" id="sol-name" placeholder="e.g. AquaMesh Solar Sensor Grid" class="w-full p-3 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none" required />
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Team Name</label>
+            <input type="text" id="sol-team-name" placeholder="e.g. AquaMesh Collective" class="w-full p-3 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Solution Description & Executive Summary *</label>
+          <textarea id="sol-description" rows="3" placeholder="Provide a clear, high-level summary of your proposed solution..." class="w-full p-3 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none"></textarea>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">How It Works & Technical Architecture</label>
+          <textarea id="sol-how-it-works" rows="3" placeholder="Explain the hardware/software mechanism, data flow, and key components..." class="w-full p-3 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none"></textarea>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Technology Used (Comma-separated)</label>
+            <input type="text" id="sol-tech" placeholder="e.g. Python, IoT, LoRaWAN, Cloud, React" class="w-full p-3 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Estimated Unit Cost / Implementation Budget</label>
+            <input type="text" id="sol-cost" placeholder="e.g. $45 per node / $12,500 total" class="w-full p-3 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none" />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Prototype / Demo URL</label>
+            <input type="text" id="sol-demo-url" placeholder="https://demo.app" class="w-full p-3 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none" />
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">GitHub Repository URL</label>
+            <input type="text" id="sol-github-url" placeholder="https://github.com/repo" class="w-full p-3 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none" />
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Video Demo URL</label>
+            <input type="text" id="sol-video-url" placeholder="https://youtube.com/watch?v=..." class="w-full p-3 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none" />
+          </div>
+        </div>
+
+        <div class="pt-4 flex items-center justify-between border-t border-slate-100">
+          <button type="button" onclick="submitSolutionForm(true)" class="px-6 py-2.5 rounded-xl border border-slate-300 text-slate-700 font-semibold text-sm hover:bg-slate-50">Save Draft</button>
+          <button type="button" onclick="submitSolutionForm(false)" class="px-8 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-lg shadow-emerald-500/20">Submit Solution Proposal</button>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- PAGE 6: SOLUTIONS MARKETPLACE ("EXPLORE SOLUTIONS") -->
+    <section id="page-solutions" class="page-view hidden py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      
+      <div class="border-b border-slate-200 pb-6">
+        <h1 class="text-3xl font-extrabold text-slate-900">Explore Solutions</h1>
+        <p class="text-slate-600 text-sm mt-1">Discover innovative prototypes, software, and hardware builds created by global teams.</p>
+      </div>
+
+      <!-- TECH TAG FILTER BADGES -->
+      <div class="flex flex-wrap items-center gap-2" id="solutions-tech-filters">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <!-- SOLUTIONS GRID -->
+      <div id="solutions-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Rendered dynamically -->
+      </div>
+
+    </section>
+
+    <!-- PAGE 7: CHALLENGES -->
+    <section id="page-challenges" class="page-view hidden py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      
+      <div class="border-b border-slate-200 pb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h1 class="text-3xl font-extrabold text-slate-900">Active Innovation Challenges</h1>
+          <p class="text-slate-600 text-sm mt-1">Participate in targeted innovation competitions with funding, prizes, and incubator support.</p>
+        </div>
+        <button onclick="openCreateChallengeModal()" class="px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-semibold text-sm shadow-md flex items-center gap-2">
+          <i data-lucide="plus" class="w-4 h-4"></i> Create Challenge
+        </button>
+      </div>
+
+      <div id="challenges-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Loaded dynamically -->
+      </div>
+
+    </section>
+
+    <!-- PAGE 8: TEAM COLLABORATION -->
+    <section id="page-teams" class="page-view hidden py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      
+      <div class="border-b border-slate-200 pb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h1 class="text-3xl font-extrabold text-slate-900">Team Collaboration Hub</h1>
+          <p class="text-slate-600 text-sm mt-1">Connect with developers, researchers, UI/UX designers, and hardware hackers to build winning solutions.</p>
+        </div>
+        <button onclick="openCreateTeamModal()" class="px-5 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm shadow-md flex items-center gap-2">
+          <i data-lucide="users" class="w-4 h-4"></i> Form a New Team
+        </button>
+      </div>
+
+      <div id="teams-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Loaded dynamically -->
+      </div>
+
+    </section>
+
+    <!-- PAGE 9: LEADERBOARD & BADGES -->
+    <section id="page-leaderboard" class="page-view hidden py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      
+      <div class="border-b border-slate-200 pb-6">
+        <h1 class="text-3xl font-extrabold text-slate-900">Platform Leaderboard & Badges</h1>
+        <p class="text-slate-600 text-sm mt-1">Recognizing top problem spotters, solution builders, and social impact leaders.</p>
+      </div>
+
+      <!-- Badges Showcase -->
+      <div class="grid grid-cols-2 sm:grid-cols-5 gap-4">
+        <div class="p-4 rounded-2xl bg-amber-50 border border-amber-200 text-center space-y-2">
+          <span class="text-2xl">🎯</span>
+          <h4 class="font-bold text-amber-900 text-xs">Problem Spotter</h4>
+          <p class="text-[10px] text-amber-700">Posted validated real-world challenges.</p>
+        </div>
+        <div class="p-4 rounded-2xl bg-brand-50 border border-brand-200 text-center space-y-2">
+          <span class="text-2xl">🛠️</span>
+          <h4 class="font-bold text-brand-900 text-xs">Solution Builder</h4>
+          <p class="text-[10px] text-brand-700">Submitted prototype & code repository.</p>
+        </div>
+        <div class="p-4 rounded-2xl bg-purple-50 border border-purple-200 text-center space-y-2">
+          <span class="text-2xl">🚀</span>
+          <h4 class="font-bold text-purple-900 text-xs">Innovation Leader</h4>
+          <p class="text-[10px] text-purple-700">Top 5% in community upvotes.</p>
+        </div>
+        <div class="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-center space-y-2">
+          <span class="text-2xl">🏆</span>
+          <h4 class="font-bold text-emerald-900 text-xs">Impact Maker</h4>
+          <p class="text-[10px] text-emerald-700">Solution selected for field implementation.</p>
+        </div>
+        <div class="p-4 rounded-2xl bg-rose-50 border border-rose-200 text-center space-y-2">
+          <span class="text-2xl">🤝</span>
+          <h4 class="font-bold text-rose-900 text-xs">Community Champion</h4>
+          <p class="text-[10px] text-rose-700">Active mentor & reviewer.</p>
+        </div>
+      </div>
+
+      <!-- Leaderboard Tables Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- Top Innovators -->
+        <div class="glass-card p-6 rounded-3xl space-y-4 lg:col-span-2">
+          <h3 class="font-bold text-lg text-slate-900 flex items-center justify-between">
+            <span>Top Innovators</span>
+            <span class="text-xs font-semibold text-slate-500">Updated Daily</span>
+          </h3>
+          <div class="divide-y divide-slate-100" id="leaderboard-innovators-list">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+
+        <!-- Top Teams & Most Supported Solutions -->
+        <div class="space-y-6">
+          <div class="glass-card p-6 rounded-3xl space-y-4">
+            <h3 class="font-bold text-base text-slate-900">Top Collaboration Teams</h3>
+            <div id="leaderboard-teams-list" class="space-y-3 text-xs">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+
+          <div class="glass-card p-6 rounded-3xl space-y-4">
+            <h3 class="font-bold text-base text-slate-900">Most Supported Solutions</h3>
+            <div id="leaderboard-solutions-list" class="space-y-3 text-xs">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- PAGE 10: USER / ORGANIZATION PROFILE -->
+    <section id="page-profile" class="page-view hidden py-12 max-w-5xl mx-auto px-4 space-y-8">
+      <div id="user-profile-container">
+        <!-- Loaded via JS -->
+      </div>
+    </section>
+
+    <!-- PAGE 11: SUCCESS STORIES -->
+    <section id="page-success-stories" class="page-view hidden py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      
+      <div class="border-b border-slate-200 pb-6">
+        <h1 class="text-3xl font-extrabold text-slate-900">Success Stories & Measured Impact</h1>
+        <p class="text-slate-600 text-sm mt-1">Real problems turned into field-deployed solutions touching thousands of lives.</p>
+      </div>
+
+      <div id="success-stories-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Loaded dynamically -->
+      </div>
+
+    </section>
+
+    <!-- PAGE 12: ADMIN DASHBOARD -->
+    <section id="page-admin" class="page-view hidden py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      
+      <div class="border-b border-slate-200 pb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="px-2.5 py-1 rounded-md bg-rose-100 text-rose-700 font-bold text-xs">SECURE ADMIN PANEL</span>
+            <h1 class="text-3xl font-extrabold text-slate-900">Platform Management Dashboard</h1>
+          </div>
+          <p class="text-slate-600 text-sm mt-1">Moderation queue, user management, and live editable homepage statistics.</p>
+        </div>
+      </div>
+
+      <!-- Admin Overview Stats -->
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-4" id="admin-summary-cards">
+        <!-- Dynamic -->
+      </div>
+
+      <!-- Editable Platform Stats Section -->
+      <div class="glass-card p-6 rounded-3xl space-y-4">
+        <h3 class="font-bold text-slate-900 text-lg border-b pb-2">Manage Homepage Animated Counters</h3>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 text-xs" id="admin-editable-stats-form">
+          <!-- Dynamic -->
+        </div>
+        <div class="text-right pt-2">
+          <button onclick="saveAdminStats()" class="px-5 py-2 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs shadow-md">Update Platform Counters</button>
+        </div>
+      </div>
+
+      <!-- Chart.js Analytics Charts -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="glass-card p-6 rounded-3xl space-y-4">
+          <h3 class="font-bold text-slate-900 text-base">Monthly Problem & Solution Growth</h3>
+          <canvas id="chart-growth" height="200"></canvas>
+        </div>
+        <div class="glass-card p-6 rounded-3xl space-y-4">
+          <h3 class="font-bold text-slate-900 text-base">Problem Categories Distribution</h3>
+          <canvas id="chart-categories" height="200"></canvas>
+        </div>
+      </div>
+
+      <!-- Moderation Queue -->
+      <div class="glass-card p-6 rounded-3xl space-y-4">
+        <h3 class="font-bold text-slate-900 text-lg">Problems & Solutions Moderation Queue</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-slate-100 text-slate-700 font-bold uppercase">
+              <tr>
+                <th class="p-3">Title / Name</th>
+                <th class="p-3">Category</th>
+                <th class="p-3">Organization</th>
+                <th class="p-3">Status</th>
+                <th class="p-3 text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="admin-moderation-table" class="divide-y divide-slate-100">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="bg-slate-900 text-slate-400 text-sm border-t border-slate-800 mt-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+        
+        <!-- Brand Intro -->
+        <div class="space-y-4 md:col-span-1">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-lg bg-brand-600 flex items-center justify-center text-white font-bold text-lg">✦</div>
+            <span class="font-heading text-lg font-bold text-white tracking-tight">SPOT PROBLEM SOLVER</span>
+          </div>
+          <p class="text-xs leading-relaxed text-slate-400">
+            “Spot a Problem. Build a Solution. Create an Impact.”
+          </p>
+          <p class="text-xs text-slate-500">Inspiring global, open-source technology for civic and social impact.</p>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h4 class="font-bold text-white text-xs uppercase tracking-wider mb-4">Platform</h4>
+          <ul class="space-y-2 text-xs">
+            <li><a href="#discover" onclick="navigateTo('discover')" class="hover:text-white transition-colors">Discover Problems</a></li>
+            <li><a href="#solutions" onclick="navigateTo('solutions')" class="hover:text-white transition-colors">Explore Solutions</a></li>
+            <li><a href="#challenges" onclick="navigateTo('challenges')" class="hover:text-white transition-colors">Active Challenges</a></li>
+            <li><a href="#teams" onclick="navigateTo('teams')" class="hover:text-white transition-colors">Team Hub</a></li>
+            <li><a href="#leaderboard" onclick="navigateTo('leaderboard')" class="hover:text-white transition-colors">Leaderboard</a></li>
+          </ul>
+        </div>
+
+        <!-- Categories -->
+        <div>
+          <h4 class="font-bold text-white text-xs uppercase tracking-wider mb-4">Impact Domains</h4>
+          <ul class="space-y-2 text-xs">
+            <li><a href="#discover" onclick="navigateTo('discover')" class="hover:text-white transition-colors">Clean Water & Sanitaton</a></li>
+            <li><a href="#discover" onclick="navigateTo('discover')" class="hover:text-white transition-colors">Disaster & Climate AI</a></li>
+            <li><a href="#discover" onclick="navigateTo('discover')" class="hover:text-white transition-colors">Smart Cities & Waste</a></li>
+            <li><a href="#discover" onclick="navigateTo('discover')" class="hover:text-white transition-colors">AgTech & Cold Chain</a></li>
+            <li><a href="#discover" onclick="navigateTo('discover')" class="hover:text-white transition-colors">Healthcare Security</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact & Legal -->
+        <div class="space-y-4">
+          <h4 class="font-bold text-white text-xs uppercase tracking-wider mb-2">Connect & Support</h4>
+          <p class="text-xs text-slate-400">Join our open community of problem solvers worldwide.</p>
+          <div class="flex items-center gap-3 text-lg">
+            <a href="#" class="text-slate-400 hover:text-white"><i class="fa-brands fa-github"></i></a>
+            <a href="#" class="text-slate-400 hover:text-white"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#" class="text-slate-400 hover:text-white"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="#" class="text-slate-400 hover:text-white"><i class="fa-brands fa-discord"></i></a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="border-t border-slate-800 mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500">
+        <p>© 2026 Spot Problem Solver Platform. All rights reserved.</p>
+        <div class="flex items-center gap-6 mt-4 sm:mt-0">
+          <a href="#" class="hover:text-slate-400">Privacy Policy</a>
+          <a href="#" class="hover:text-slate-400">Terms of Service</a>
+          <a href="#" class="hover:text-slate-400">Security Guidelines</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== AI ASSISTANT MODAL (PROBLEM ANALYZER & SOLUTION ASSISTANT) ===== -->
+  <div id="modal-ai-assistant" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop">
+    <div class="bg-white rounded-3xl max-w-3xl w-full p-8 shadow-2xl space-y-6 relative max-h-[90vh] overflow-y-auto">
+      
+      <button onclick="closeAIAssistantModal()" class="absolute top-6 right-6 text-slate-400 hover:text-slate-700">
+        <i data-lucide="x" class="w-6 h-6"></i>
+      </button>
+
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center font-bold">
+          <i data-lucide="sparkles" class="w-6 h-6"></i>
+        </div>
+        <div>
+          <h3 class="font-extrabold text-slate-900 text-xl">Spot AI Problem & Solution Assistant</h3>
+          <p class="text-xs text-slate-500">AI-powered problem structuring, root-cause extraction, and proposal improvement.</p>
+        </div>
+      </div>
+
+      <!-- Tab Buttons -->
+      <div class="flex border-b border-slate-200 font-semibold text-xs">
+        <button onclick="switchAITab('analyzer')" id="ai-tab-analyzer-btn" class="px-4 py-2.5 border-b-2 border-amber-500 text-amber-600">Problem Analyzer</button>
+        <button onclick="switchAITab('solution')" id="ai-tab-solution-btn" class="px-4 py-2.5 border-b-2 border-transparent text-slate-500 hover:text-slate-800">AI Solution Assistant</button>
+      </div>
+
+      <!-- Tab 1: Problem Analyzer -->
+      <div id="ai-tab-analyzer" class="space-y-4">
+        <label class="block text-xs font-bold uppercase tracking-wider text-slate-700">Enter Raw Problem Statement or Idea</label>
+        <textarea id="ai-problem-input" rows="3" placeholder="e.g. Villages in mountain areas don't have early flood warnings when river levels surge during monsoon rains..." class="w-full p-3.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-amber-500 focus:outline-none"></textarea>
+        <button onclick="runAIProblemAnalysis()" class="px-6 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs shadow-md flex items-center gap-2">
+          <i data-lucide="cpu" class="w-4 h-4"></i> Run Problem Analysis
+        </button>
+
+        <div id="ai-problem-output" class="hidden p-6 rounded-2xl bg-amber-50/50 border border-amber-200 text-xs space-y-4">
+          <!-- Loaded via JS -->
+        </div>
+      </div>
+
+      <!-- Tab 2: AI Solution Assistant -->
+      <div id="ai-tab-solution" class="hidden space-y-4">
+        <label class="block text-xs font-bold uppercase tracking-wider text-slate-700">Paste Your Solution Description / Proposal Draft</label>
+        <textarea id="ai-solution-input" rows="3" placeholder="e.g. We created a solar-powered sensor node using LoRaWAN mesh networks to monitor river velocity..." class="w-full p-3.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none"></textarea>
+        <button onclick="runAISolutionAnalysis()" class="px-6 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs shadow-md flex items-center gap-2">
+          <i data-lucide="sparkles" class="w-4 h-4"></i> Get Technical & Scalability Feedback
+        </button>
+
+        <div id="ai-solution-output" class="hidden p-6 rounded-2xl bg-brand-50/50 border border-brand-200 text-xs space-y-4">
+          <!-- Loaded via JS -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== MODAL: FORM NEW TEAM ===== -->
+  <div id="modal-create-team" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-8 shadow-2xl space-y-5 relative">
+      <button onclick="closeCreateTeamModal()" class="absolute top-6 right-6 text-slate-400 hover:text-slate-700">
+        <i data-lucide="x" class="w-6 h-6"></i>
+      </button>
+      <h3 class="font-extrabold text-slate-900 text-xl">Form a Collaboration Team</h3>
+      <div>
+        <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">Team Name</label>
+        <input type="text" id="mt-name" placeholder="e.g. EcoEngineers Lab" class="w-full p-3 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none" />
+      </div>
+      <div>
+        <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">Tagline / Mission</label>
+        <input type="text" id="mt-tagline" placeholder="e.g. Building zero-carbon AgTech thermal batteries" class="w-full p-3 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none" />
+      </div>
+      <div>
+        <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">Looking for Skills (Comma-separated)</label>
+        <input type="text" id="mt-skills" placeholder="e.g. Python, React, AI/ML, Hardware, UI/UX" class="w-full p-3 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none" />
+      </div>
+      <div class="pt-2 text-right">
+        <button onclick="submitCreateTeam()" class="px-6 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm shadow-md">Create Team</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div id="toast-container"></div>
+
+  <!-- React JS Animated Innovation Radar Component -->
+  <script type="text/babel" src="/static/js/react_components.js"></script>
+
+  <!-- Main JavaScript App Engine -->
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NOVA — Women in Technology</title>
+  <meta name="description" content="Empowering women in technology through mentorship, coding bootcamps, and leadership programs. Join the Nova initiative and lead the future of tech." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Background Gradients -->
+  <div class="gradient blob1"></div>
+  <div class="gradient blob2"></div>
+  <div class="gradient blob3"></div>
+  <div class="noise-overlay"></div>
+
+  <!-- ===== HEADER ===== -->
+  <header id="main-header">
+    <nav class="nav-container">
+      <a href="#" class="logo" id="logo-link">
+        <span class="logo-icon">✦</span> NOVA
+      </a>
+
+      <ul class="nav-links" id="nav-menu">
+        <li><a href="#hero" class="nav-link">Home</a></li>
+        <li><a href="#mission" class="nav-link">Mission</a></li>
+        <li><a href="#programs" class="nav-link">Programs</a></li>
+        <li><a href="#metrics" class="nav-link">Metrics</a></li>
+        <li><a href="#stories" class="nav-link">Stories</a></li>
+        <li><a href="#join" class="nav-link">Join</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="#join" class="btn btn-glow" id="nav-cta">Get Started</a>
+        <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="hero">
+    <div class="hero-left">
+      <span class="hero-badge"><i class="fa-solid fa-star"></i> Empowering the Future</span>
+      <h1>Build Modern <span class="gradient-text">Digital Experiences</span> for Women in Tech</h1>
+      <p>We create pathways for women to lead, innovate, and excel in the technology industry through world-class mentorship, coding bootcamps, and leadership circles.</p>
+
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-num" data-target="5200">0</span><span>+</span>
+          <span class="stat-label">Women Trained</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-num" data-target="94">0</span><span>%</span>
+          <span class="stat-label">Placement Rate</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-num" data-target="180">0</span><span>+</span>
+          <span class="stat-label">Partner Companies</span>
+        </div>
+      </div>
+
+      <div class="hero-buttons">
+        <a href="#programs" class="btn btn-primary" id="btn-start">
+          <i class="fa-solid fa-rocket"></i> Start Project
+        </a>
+        <a href="#metrics" class="btn btn-outline" id="btn-view">
+          <i class="fa-solid fa-chart-line"></i> View Data
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="glass-card card-main tilt-card" id="hero-card">
+        <div class="card-glow"></div>
+        <div class="card-header-row">
+          <div class="card-dot red"></div>
+          <div class="card-dot yellow"></div>
+          <div class="card-dot green"></div>
+        </div>
+        <h3><i class="fa-solid fa-microchip"></i> Creative Design</h3>
+        <div class="card-tags">
+          <span class="tag">Modern UI</span>
+          <span class="tag">Responsive</span>
+          <span class="tag">Premium Animation</span>
+        </div>
+        <div class="card-chart-mini">
+          <svg viewBox="0 0 200 70" class="mini-chart">
+            <polyline points="0,60 30,45 60,50 90,25 120,30 160,10 200,15" fill="none" stroke="url(#lineGrad)" stroke-width="2.5" stroke-linecap="round"/>
+            <defs>
+              <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#a855f7"/>
+                <stop offset="100%" style="stop-color:#22d3ee"/>
+              </linearGradient>
+            </defs>
+            <circle cx="160" cy="10" r="4" fill="#22d3ee"/>
+            <circle cx="90" cy="25" r="4" fill="#a855f7"/>
+            <circle cx="30" cy="45" r="3" fill="#f0abfc"/>
+          </svg>
+        </div>
+        <div class="card-progress">
+          <div class="progress-row">
+            <span>Mentorship</span>
+            <div class="progress-bar"><div class="progress-fill" style="--w:88%"></div></div>
+            <span>88%</span>
+          </div>
+          <div class="progress-row">
+            <span>Bootcamps</span>
+            <div class="progress-bar"><div class="progress-fill" style="--w:74%"></div></div>
+            <span>74%</span>
+          </div>
+          <div class="progress-row">
+            <span>Leadership</span>
+            <div class="progress-bar"><div class="progress-fill" style="--w:92%"></div></div>
+            <span>92%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Floating badges -->
+      <div class="float-badge badge-1">
+        <i class="fa-solid fa-trophy"></i>
+        <span>Award Winning</span>
+      </div>
+      <div class="float-badge badge-2">
+        <i class="fa-solid fa-users"></i>
+        <span>5K+ Members</span>
+      </div>
+      <div class="float-badge badge-3">
+        <i class="fa-solid fa-fire"></i>
+        <span>Fast Growing</span>
+      </div>
+    </div>
+
+    <div class="scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ===== MISSION ===== -->
+  <section class="mission-section" id="mission">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Our Mission</span>
+        <h2 class="section-title">Re-Engineering the <span class="gradient-text">Gender Balance</span></h2>
+        <p class="section-desc">We believe diversity drives innovation. Our initiatives break systemic barriers and create real opportunities for women in every corner of tech.</p>
+      </div>
+
+      <div class="mission-grid">
+        <div class="mission-card reveal delay-1 tilt-card">
+          <div class="mission-icon"><i class="fa-solid fa-brain"></i></div>
+          <h3>Mentorship</h3>
+          <p>1-on-1 coaching with senior engineers, product managers, and tech executives from Google, Microsoft & more.</p>
+          <a href="#programs" class="card-link">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="mission-card reveal delay-2 tilt-card">
+          <div class="mission-icon"><i class="fa-solid fa-code"></i></div>
+          <h3>Coding Bootcamps</h3>
+          <p>Intensive 12-week programs in Full Stack, AI/ML, Data Science, and Cloud Computing with job guarantees.</p>
+          <a href="#programs" class="card-link">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="mission-card reveal delay-3 tilt-card">
+          <div class="mission-icon"><i class="fa-solid fa-crown"></i></div>
+          <h3>Leadership Circles</h3>
+          <p>Executive-level programs to build the next generation of women CTOs, VPs, and tech founders.</p>
+          <a href="#programs" class="card-link">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== METRICS / GRAPHS ===== -->
+  <section class="metrics-section" id="metrics">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Data & Impact</span>
+        <h2 class="section-title">Women in Tech: <span class="gradient-text">The Numbers</span></h2>
+        <p class="section-desc">Tracking real progress. Here's how the landscape is changing — and how Nova is driving that change.</p>
+      </div>
+
+      <div class="metrics-grid">
+        <!-- Line Chart: Growth Over Time -->
+        <div class="chart-card reveal delay-1 tilt-card">
+          <div class="chart-card-header">
+            <h3><i class="fa-solid fa-chart-line"></i> Women in Tech Leadership</h3>
+            <span class="chart-badge trend-up"><i class="fa-solid fa-arrow-trend-up"></i> +34% since 2018</span>
+          </div>
+          <div class="chart-wrapper">
+            <canvas id="growthChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Bar Chart: Sector Representation -->
+        <div class="chart-card reveal delay-2 tilt-card">
+          <div class="chart-card-header">
+            <h3><i class="fa-solid fa-chart-bar"></i> Sector Representation</h3>
+            <span class="chart-badge trend-up"><i class="fa-solid fa-arrow-trend-up"></i> Growing</span>
+          </div>
+          <div class="chart-wrapper">
+            <canvas id="sectorChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Doughnut Chart: Program Outcomes -->
+        <div class="chart-card reveal delay-3 tilt-card chart-small">
+          <div class="chart-card-header">
+            <h3><i class="fa-solid fa-circle-nodes"></i> Program Outcomes</h3>
+          </div>
+          <div class="chart-wrapper chart-doughnut-wrapper">
+            <canvas id="outcomeChart"></canvas>
+            <div class="doughnut-center">
+              <span class="big-num">94%</span>
+              <span>Placement</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Radar Chart: Skills Developed -->
+        <div class="chart-card reveal delay-4 tilt-card chart-small">
+          <div class="chart-card-header">
+            <h3><i class="fa-solid fa-network-wired"></i> Skills Profile</h3>
+          </div>
+          <div class="chart-wrapper">
+            <canvas id="skillsChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Counter Cards -->
+      <div class="counter-strip reveal">
+        <div class="counter-card">
+          <i class="fa-solid fa-graduation-cap"></i>
+          <div>
+            <span class="counter-num" data-target="5200">0</span><span>+</span>
+            <p>Graduates</p>
+          </div>
+        </div>
+        <div class="counter-card">
+          <i class="fa-solid fa-handshake"></i>
+          <div>
+            <span class="counter-num" data-target="180">0</span><span>+</span>
+            <p>Partner Companies</p>
+          </div>
+        </div>
+        <div class="counter-card">
+          <i class="fa-solid fa-dollar-sign"></i>
+          <div>
+            <span class="counter-num" data-target="82">0</span><span>K Avg Salary</span>
+            <p>Post-Placement</p>
+          </div>
+        </div>
+        <div class="counter-card">
+          <i class="fa-solid fa-globe"></i>
+          <div>
+            <span class="counter-num" data-target="42">0</span><span>+</span>
+            <p>Countries Reached</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PROGRAMS ===== -->
+  <section class="programs-section" id="programs">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Nova Pillars</span>
+        <h2 class="section-title">Our <span class="gradient-text">Programs</span></h2>
+        <p class="section-desc">End-to-end programs designed to take you from beginner to industry leader.</p>
+      </div>
+
+      <!-- Tab Navigation -->
+      <div class="tab-nav reveal">
+        <button class="tab-btn active" data-tab="mentorship" id="tab-mentorship"><i class="fa-solid fa-brain"></i> Mentorship</button>
+        <button class="tab-btn" data-tab="bootcamps" id="tab-bootcamps"><i class="fa-solid fa-code"></i> Bootcamps</button>
+        <button class="tab-btn" data-tab="leadership" id="tab-leadership"><i class="fa-solid fa-crown"></i> Leadership</button>
+        <button class="tab-btn" data-tab="scholarships" id="tab-scholarships"><i class="fa-solid fa-medal"></i> Scholarships</button>
+      </div>
+
+      <!-- Tab Contents -->
+      <div id="tab-content-mentorship" class="tab-content active">
+        <div class="program-layout">
+          <div class="program-info">
+            <h3>1-on-1 Mentorship Program</h3>
+            <p>Be matched with a senior professional from a top tech company who guides your learning, career strategy, and personal growth. Our mentors come from Google, Amazon, Microsoft, Apple, and 180+ other firms.</p>
+            <ul class="program-features">
+              <li><i class="fa-solid fa-check-circle"></i> Weekly 1-on-1 video sessions</li>
+              <li><i class="fa-solid fa-check-circle"></i> Personalized learning roadmap</li>
+              <li><i class="fa-solid fa-check-circle"></i> Resume & interview prep</li>
+              <li><i class="fa-solid fa-check-circle"></i> Access to our private network</li>
+            </ul>
+            <a href="#join" class="btn btn-primary">Apply Now <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+          <div class="program-visual">
+            <div class="mentor-cards">
+              <div class="mentor-card"><div class="mentor-avatar m1"></div><div><strong>Priya Sharma</strong><span>Senior SWE, Google</span></div><span class="mentor-tag">Available</span></div>
+              <div class="mentor-card"><div class="mentor-avatar m2"></div><div><strong>Sarah Chen</strong><span>VP Engineering, Stripe</span></div><span class="mentor-tag">Available</span></div>
+              <div class="mentor-card"><div class="mentor-avatar m3"></div><div><strong>Aisha Okafor</strong><span>AI Lead, Microsoft</span></div><span class="mentor-tag">Available</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-content-bootcamps" class="tab-content">
+        <div class="program-layout">
+          <div class="program-info">
+            <h3>Intensive Coding Bootcamps</h3>
+            <p>12-week, project-based intensive programs designed to get you job-ready fast. Choose from Full Stack Web, AI & Machine Learning, Data Science, or Cloud Engineering tracks.</p>
+            <ul class="program-features">
+              <li><i class="fa-solid fa-check-circle"></i> 12-week intensive curriculum</li>
+              <li><i class="fa-solid fa-check-circle"></i> Live sessions & project reviews</li>
+              <li><i class="fa-solid fa-check-circle"></i> Job placement guarantee</li>
+              <li><i class="fa-solid fa-check-circle"></i> Income share agreement available</li>
+            </ul>
+            <a href="#join" class="btn btn-primary">Enroll Now <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+          <div class="program-visual">
+            <div class="track-cards">
+              <div class="track-card"><i class="fa-solid fa-globe"></i><span>Full Stack Web</span></div>
+              <div class="track-card"><i class="fa-solid fa-robot"></i><span>AI & Machine Learning</span></div>
+              <div class="track-card"><i class="fa-solid fa-database"></i><span>Data Science</span></div>
+              <div class="track-card"><i class="fa-brands fa-aws"></i><span>Cloud Engineering</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-content-leadership" class="tab-content">
+        <div class="program-layout">
+          <div class="program-info">
+            <h3>Executive Leadership Circles</h3>
+            <p>An exclusive 6-month accelerator for women aiming for C-suite and VP-level roles. Combine strategic business skills with tech leadership to become the next generation of tech executives.</p>
+            <ul class="program-features">
+              <li><i class="fa-solid fa-check-circle"></i> Executive coaching sessions</li>
+              <li><i class="fa-solid fa-check-circle"></i> Board-level exposure & visits</li>
+              <li><i class="fa-solid fa-check-circle"></i> Strategic leadership curriculum</li>
+              <li><i class="fa-solid fa-check-circle"></i> Investor & VC networking</li>
+            </ul>
+            <a href="#join" class="btn btn-primary">Apply Now <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+          <div class="program-visual">
+            <div class="leadership-stats">
+              <div class="ls-card"><span class="ls-num">6</span><span>Months</span></div>
+              <div class="ls-card"><span class="ls-num">30</span><span>Cohort Size</span></div>
+              <div class="ls-card"><span class="ls-num">100%</span><span>Promotion Rate</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-content-scholarships" class="tab-content">
+        <div class="program-layout">
+          <div class="program-info">
+            <h3>Nova Scholarship Fund</h3>
+            <p>We believe no financial barrier should stop a woman from accessing tech education. Our scholarship fund provides full and partial grants to eligible candidates from underrepresented communities.</p>
+            <ul class="program-features">
+              <li><i class="fa-solid fa-check-circle"></i> Full & partial scholarships available</li>
+              <li><i class="fa-solid fa-check-circle"></i> Priority for underrepresented groups</li>
+              <li><i class="fa-solid fa-check-circle"></i> Monthly stipend support</li>
+              <li><i class="fa-solid fa-check-circle"></i> Equipment & internet subsidy</li>
+            </ul>
+            <a href="#join" class="btn btn-primary">Check Eligibility <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+          <div class="program-visual">
+            <div class="scholarship-info">
+              <div class="grant-card">
+                <span class="grant-amount">$8,500</span>
+                <span class="grant-label">Average Grant</span>
+              </div>
+              <p>Over $2.1M in scholarships awarded since 2021</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FEATURES / PILLARS ===== -->
+  <section class="features-section" id="features">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Why Nova</span>
+        <h2 class="section-title">Built For <span class="gradient-text">Excellence</span></h2>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card reveal delay-1 tilt-card">
+          <div class="feature-icon-wrap"><i class="fa-solid fa-bolt"></i></div>
+          <h2>Fast</h2>
+          <p>Lightning-fast, practical programs with immediate real-world application from day one.</p>
+          <div class="feature-glow"></div>
+        </div>
+        <div class="feature-card reveal delay-2 tilt-card">
+          <div class="feature-icon-wrap"><i class="fa-solid fa-mobile-screen"></i></div>
+          <h2>Responsive</h2>
+          <p>A community that adapts to your schedule, learning style, and career stage at every step.</p>
+          <div class="feature-glow"></div>
+        </div>
+        <div class="feature-card reveal delay-3 tilt-card">
+          <div class="feature-icon-wrap"><i class="fa-solid fa-gem"></i></div>
+          <h2>Premium</h2>
+          <p>World-class faculty, glassmorphic design philosophy, and unmatched network connections.</p>
+          <div class="feature-glow"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== STORIES / TESTIMONIALS ===== -->
+  <section class="stories-section" id="stories">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Success Stories</span>
+        <h2 class="section-title">Women Who <span class="gradient-text">Changed Tech</span></h2>
+      </div>
+
+      <div class="stories-slider">
+        <div class="stories-track" id="stories-track">
+          <div class="story-card">
+            <div class="story-quote"><i class="fa-solid fa-quote-left"></i></div>
+            <p>"Nova's mentorship program completely transformed my career trajectory. Within 8 months of graduating, I landed a Senior Software Engineer role at a top FAANG company."</p>
+            <div class="story-author">
+              <div class="author-avatar a1"></div>
+              <div><strong>Priya Malhotra</strong><span>SWE III, Google · Batch 2023</span></div>
+              <div class="story-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+            </div>
+          </div>
+          <div class="story-card">
+            <div class="story-quote"><i class="fa-solid fa-quote-left"></i></div>
+            <p>"As someone from a non-CS background, I was terrified. Nova's bootcamp broke everything down perfectly. I went from zero to Data Scientist in under 4 months!"</p>
+            <div class="story-author">
+              <div class="author-avatar a2"></div>
+              <div><strong>Amara Osei</strong><span>Data Scientist, Spotify · Batch 2024</span></div>
+              <div class="story-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+            </div>
+          </div>
+          <div class="story-card">
+            <div class="story-quote"><i class="fa-solid fa-quote-left"></i></div>
+            <p>"The Leadership Circle gave me the confidence and strategic thinking I needed to finally pitch and lead my own startup. We raised $1.2M seed funding this year!"</p>
+            <div class="story-author">
+              <div class="author-avatar a3"></div>
+              <div><strong>Sofia Hernandez</strong><span>Founder, TechNova AI · Cohort 2024</span></div>
+              <div class="story-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+            </div>
+          </div>
+          <div class="story-card">
+            <div class="story-quote"><i class="fa-solid fa-quote-left"></i></div>
+            <p>"The scholarship made all the difference. I couldn't have afforded tuition, but Nova believed in me. Now I'm a Cloud Architect at AWS earning 3x my previous salary."</p>
+            <div class="story-author">
+              <div class="author-avatar a4"></div>
+              <div><strong>Fatima Al-Hassan</strong><span>Cloud Architect, AWS · Batch 2023</span></div>
+              <div class="story-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slider-controls">
+          <button class="slider-btn" id="prev-story"><i class="fa-solid fa-chevron-left"></i></button>
+          <div class="slider-dots" id="slider-dots">
+            <div class="dot active"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+          </div>
+          <button class="slider-btn" id="next-story"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== JOIN / CTA ===== -->
+  <section class="join-section" id="join">
+    <div class="container">
+      <div class="join-card reveal tilt-card">
+        <div class="join-glow-top"></div>
+        <div class="join-content">
+          <span class="section-label">Ready to Begin?</span>
+          <h2>Start Your <span class="gradient-text">Tech Journey</span> Today</h2>
+          <p>Applications for our next cohort are now open. Limited seats available — don't miss your chance to transform your career.</p>
+          <form class="join-form" id="join-form">
+            <input type="text" placeholder="Full Name" required id="input-name" />
+            <input type="email" placeholder="Email Address" required id="input-email" />
+            <select id="input-program">
+              <option value="" disabled selected>Choose a Program</option>
+              <option value="mentorship">Mentorship</option>
+              <option value="bootcamp">Coding Bootcamp</option>
+              <option value="leadership">Leadership Circle</option>
+              <option value="scholarship">Scholarship</option>
+            </select>
+            <button type="submit" class="btn btn-primary btn-full" id="btn-submit">
+              <i class="fa-solid fa-paper-plane"></i> Apply Now — It's Free
+            </button>
+          </form>
+        </div>
+        <div class="join-deco">
+          <div class="deco-circle c1"></div>
+          <div class="deco-circle c2"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="logo">✦ NOVA</a>
+          <p>Empowering women to lead, innovate, and excel in the technology industry.</p>
+          <div class="social-links">
+            <a href="#" id="social-twitter"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#" id="social-linkedin"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#" id="social-instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" id="social-github"><i class="fa-brands fa-github"></i></a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4>Programs</h4>
+          <a href="#programs">Mentorship</a>
+          <a href="#programs">Bootcamps</a>
+          <a href="#programs">Leadership</a>
+          <a href="#programs">Scholarships</a>
+        </div>
+        <div class="footer-links">
+          <h4>Company</h4>
+          <a href="#mission">About Us</a>
+          <a href="#stories">Success Stories</a>
+          <a href="#metrics">Impact Data</a>
+          <a href="#join">Contact</a>
+        </div>
+        <div class="footer-links">
+          <h4>Resources</h4>
+          <a href="#">Blog</a>
+          <a href="#">Events</a>
+          <a href="#">Podcast</a>
+          <a href="#">Newsletter</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Nova Initiative. All rights reserved. Built with ❤️ for Women in Tech.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
